@@ -73,7 +73,6 @@ public class HBaseFetcher {
                 //.option("hbase.config.resources", "file:///etc/hadoop/conf/hdfs-site.xml")
                 .load();
 
-
         df2.printSchema();
         df2.show();
 
