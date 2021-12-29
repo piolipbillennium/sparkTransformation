@@ -76,7 +76,12 @@ public class HBaseFetcher {
                 .load();
 
         df2.printSchema();
+        System.out.println("22222222222222222222222222222222222222222");
         df2.show();
+        System.out.println("333333333333333333333333333333333333333333333");
+        df2.select("RAW_DATA_444").show();
+        System.out.println("44444444444444444444444444444444444444444444444");
+        System.out.println(df2.select("RAW_DATA_444"));
 
         }
         //+
