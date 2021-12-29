@@ -65,9 +65,11 @@ public class HBaseFetcher {
         df2 = sparkSession.read()
                 .format("org.apache.hadoop.hbase.spark")
                 .option("hbase.columns.mapping",
-                        "ROW String :key, RAW_DATA_ID String RAW_DATA_ID:city_name" +
-                        "ROW Integer :key, RAW_DATA_ID String RAW_DATA_ID:longitude" +
-                        "ROW Integer :key, RAW_DATA_ID String RAW_DATA_ID:latitude")
+                        "ROW String :key, " +
+                                "RAW_DATA_111 String RAW_DATA_ID:city_name,"+
+                        "RAW_DATA_2222 String RAW_DATA_ID:longitude," +
+                                "RAW_DATA_333 String RAW_DATA_ID:latitude," +
+                                "RAW_DATA_444 String RAW_DATA:api_raw_data")
                 .option("hbase.table", "HOTEL_FETCHER_RAW_DATA")
                 .option("hbase.spark.use.hbasecontext", false)
                 //.option("hbase.config.resources", "file:///etc/hadoop/conf/hdfs-site.xml")
@@ -77,4 +79,6 @@ public class HBaseFetcher {
         df2.show();
 
         }
+        //+
+    //                                "RAW_DATA_2222 String RAW_DATA_ID:longitude"
 }
