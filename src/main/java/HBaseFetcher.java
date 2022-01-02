@@ -72,6 +72,7 @@ public class HBaseFetcher {
         System.out.println();
         System.out.println();
 
+
         //Dataset<Row> col1 = sparkSession.sql("SELECT RAW_DATA_api_raw_data FROM data");
         //col1.show();
 
