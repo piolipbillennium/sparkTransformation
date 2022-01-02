@@ -9,9 +9,12 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.*;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import scala.collection.Seq;
+import static org.apache.spark.sql.functions.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Properties;
 
 
@@ -38,21 +41,6 @@ public class HBaseFetcher {
         config.addResource(new Path(properties.getProperty("hbase.site.path")));
 
         hBaseContext = new JavaHBaseContext(jsc, config);
-        /*Dataset<Row> df1;
-
-
-        df1 = sparkSession.read()
-                .format("org.apache.hadoop.hbase.spark")
-                .option("hbase.columns.mapping",
-                        "ROW String :key, DESCRIPTIONS String DESCRIPTIONS:CityDescription")
-                .option("hbase.table", "TOURISM:CITIESDESCRIPTION")
-                .option("hbase.spark.use.hbasecontext", false)
-                //.option("hbase.config.resources", "file:///etc/hadoop/conf/hdfs-site.xml")
-                .load();
-        df1.createOrReplaceTempView("personView");
-        df1.printSchema();
-        df1.show();*/
-
         System.out.println("11111111111111111111111111111111111111");
         System.out.println();
         System.out.println();
@@ -60,25 +48,39 @@ public class HBaseFetcher {
         System.out.println();
         System.out.println();
         System.out.println();
-
-        Dataset<Row> df2;
-        df2 = sparkSession.read()
+        System.out.println();
+        Dataset<Row> df2 = sparkSession.read()
                 .format("org.apache.hadoop.hbase.spark")
                 .option("hbase.columns.mapping",
                         "ROW String :key, " +
-                                "RAW_DATA_111 String RAW_DATA_ID:city_name,"+
-                        "RAW_DATA_2222 String RAW_DATA_ID:longitude," +
-                                "RAW_DATA_333 String RAW_DATA_ID:latitude," +
-                                "RAW_DATA_444 String RAW_DATA:api_raw_data")
+                                "RAW_DATA_ID:city_name String RAW_DATA_ID:city_name," +
+                                "RAW_DATA_ID:longitude String RAW_DATA_ID:longitude," +
+                                "RAW_DATA_ID:latitude String RAW_DATA_ID:latitude," +
+                                "RAW_DATA_api:raw_data String RAW_DATA:api_raw_data")
                 .option("hbase.table", "HOTEL_FETCHER_RAW_DATA")
                 .option("hbase.spark.use.hbasecontext", false)
-                //.option("hbase.config.resources", "file:///etc/hadoop/conf/hdfs-site.xml")
                 .load();
-
-        df2.printSchema();
+        df2.createOrReplaceTempView("data");
         df2.show();
+        //Dataset<Row> data = sparkSession.createDataFrame(df2);
+        System.out.println("11111111111111111111111111111111111111");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        //Dataset<Row> col1 = sparkSession.sql("SELECT RAW_DATA_api_raw_data FROM data");
+        //col1.show();
+
+
+
+
+
+
+
 
         }
-        //+
-    //                                "RAW_DATA_2222 String RAW_DATA_ID:longitude"
 }
